@@ -655,9 +655,9 @@ section {
 /* -------------------------------------------------------------------------- */
 .philosophy-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1342,7 +1342,8 @@ section {
         gap: 1.5rem;
     }
     .philosophy-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
         gap: 1.5rem;
     }
     .services-grid {
@@ -1449,6 +1450,11 @@ section {
     }
     .hero-section {
         padding: 7rem 0 4rem;
+    }
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        gap: 1.5rem;
     }
 }
 
