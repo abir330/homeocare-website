@@ -1415,8 +1415,17 @@ section {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
+    .form-row.grid-2 {
+        gap: 1.25rem;
+    }
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    .chamber-card {
+        padding: 1.5rem;
+    }
+    .chamber-title {
+        font-size: 1.35rem;
     }
     .appointment-card {
         padding: 2rem 1.5rem;
@@ -1438,9 +1447,70 @@ section {
     .map-card-wrapper {
         height: 300px;
     }
+    .hero-section {
+        padding: 7rem 0 4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .logo-name {
+        font-size: 1.1rem;
+    }
+    .logo-sub {
+        font-size: 0.65rem;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 2.5rem;
+    }
+    .hero-actions .btn {
+        width: 100%;
+    }
+    .hero-trust {
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+        padding-top: 1.5rem;
+    }
+    .experience-card {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -15px;
+        animation: floatMobile 4s ease-in-out infinite;
+        white-space: nowrap;
+        padding: 1rem;
+    }
+    .appointment-card {
+        padding: 1.5rem 1rem;
+    }
+    .section-title {
+        font-size: 1.75rem;
+    }
+    .section-desc {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
 }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes floatMobile {
+    0% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -8px); }
+    100% { transform: translate(-50%, 0); }
+}
+
