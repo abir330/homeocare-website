@@ -388,4 +388,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize medicine rain after page loads
     initMedicineRain();
+
+    /* ==========================================
+       7. Scroll Reveal Animation
+       ========================================== */
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    if ('IntersectionObserver' in window && revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Reveal only once
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        revealElements.forEach(el => el.classList.add('active'));
+    }
 });

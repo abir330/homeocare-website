@@ -748,6 +748,159 @@ section {
 }
 
 /* -------------------------------------------------------------------------- */
+/* 8.5. How We Care / Consultation Section                                    */
+/* -------------------------------------------------------------------------- */
+.consultation-section {
+    background-color: var(--bg-main);
+    padding: 7rem 0;
+    overflow: hidden;
+}
+
+.consultation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.consultation-illustration {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.consultation-illustration:hover {
+    border: var(--glass-border-hover);
+    box-shadow: var(--glow-hover);
+}
+
+.consultation-svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.consultation-content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+}
+
+.consult-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.consult-step:hover {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    transform: translateX(8px);
+}
+
+.step-badge {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+}
+
+.step-text h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.step-text p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Consultation SVG Animations */
+@keyframes target-pulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.0); opacity: 0; }
+}
+.stethoscope-target-pulse {
+    transform-origin: 280px 180px; /* matches circle cx/cy */
+    animation: target-pulse 2.2s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+}
+
+@keyframes ecg-sweep {
+    0% { stroke-dashoffset: 400; }
+    100% { stroke-dashoffset: 0; }
+}
+.ecg-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: ecg-sweep 3.5s linear infinite;
+    filter: drop-shadow(0 0 4px var(--primary));
+}
+
+@keyframes arm-holding {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-1.5px) rotate(0.3deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+.doctor-arm-group {
+    transform-origin: 140px 210px;
+    animation: arm-holding 5s ease-in-out infinite;
+}
+
+@keyframes float-up {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    30% { opacity: 0.65; }
+    100% { transform: translateY(-30px) scale(1.1); opacity: 0; }
+}
+.floating-bubble-1 {
+    transform-origin: center;
+    animation: float-up 3.8s ease-in-out infinite;
+}
+.floating-bubble-2 {
+    transform-origin: center;
+    animation: float-up 4.5s ease-in-out infinite 1.5s;
+}
+.floating-bubble-3 {
+    transform-origin: center;
+    animation: float-up 3.0s ease-in-out infinite 0.8s;
+}
+
+/* Scroll Reveal Mechanism */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.0s cubic-bezier(0.4, 0, 0.2, 1), transform 1.0s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------- */
 /* 9. Services & Specialization                                               */
 /* -------------------------------------------------------------------------- */
 .services-section {
@@ -1442,6 +1595,17 @@ section {
     }
     .header-container {
         padding: 0 1rem; /* reduced padding to fit logo + toggle on tablet/mobile */
+    }
+    .consultation-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .consultation-illustration {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .consult-step:hover {
+        transform: translateY(-2px); /* vertical hover shift instead of horizontal on mobile */
     }
     .nav-toggle {
         display: block;
