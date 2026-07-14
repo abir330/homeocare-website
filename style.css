@@ -175,6 +175,11 @@ section {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     position: relative;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
 }
 
 .section-desc {
@@ -305,9 +310,12 @@ section {
     font-family: var(--font-heading);
     font-size: clamp(0.8rem, 4.5vw, 1.25rem); /* wider clamp scaling range */
     font-weight: 800;
-    color: var(--text-main);
     line-height: 1.1;
     white-space: nowrap; /* prevent wrapping */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .logo-sub {
@@ -430,10 +438,14 @@ section {
     font-size: 3.5rem;
     line-height: 1.15;
     margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
 }
 
 .hero-title .highlight {
-    color: var(--primary);
     position: relative;
     display: inline-block;
 }
@@ -740,6 +752,11 @@ section {
 .philosophy-card h3 {
     font-size: 1.35rem;
     margin-bottom: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.philosophy-card:hover h3 {
+    color: var(--primary);
 }
 
 .philosophy-card p {
@@ -832,6 +849,11 @@ section {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.consult-step:hover h3 {
+    color: var(--primary);
 }
 
 .step-text p {
@@ -910,14 +932,25 @@ section {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                color 0.3s ease,
+                text-shadow 0.3s ease,
+                -webkit-text-fill-color 0.3s ease;
     transition-delay: calc(var(--word-index) * 0.05s);
     white-space: pre-wrap;
+    cursor: default;
 }
 
 .reveal-text-container.active .reveal-word {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Stagger text glow hover effect */
+.reveal-text-container.active .reveal-word:hover {
+    color: var(--primary) !important;
+    -webkit-text-fill-color: var(--primary) !important;
+    text-shadow: 0 0 12px rgba(0, 242, 255, 0.7);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -968,6 +1001,11 @@ section {
 .service-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover h3 {
+    color: var(--primary);
 }
 
 .service-card p {
@@ -1007,6 +1045,12 @@ section {
     margin-bottom: 1.5rem;
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: 0.5rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.chamber-card:hover .chamber-title {
+    color: var(--secondary);
+    border-color: var(--secondary-light);
 }
 
 .chamber-info {
