@@ -1253,11 +1253,12 @@ section {
     margin-bottom: 1.5rem;
 }
 
-.brand-col .logo-white span {
-    font-family: var(--font-heading);
+.brand-col .logo-white .logo-name {
     color: var(--text-light);
-    font-weight: 700;
-    font-size: 1.4rem;
+}
+
+.brand-col .logo-white .logo-sub {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .footer-desc {
