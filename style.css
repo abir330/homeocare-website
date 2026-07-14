@@ -303,7 +303,7 @@ section {
 
 .logo-name {
     font-family: var(--font-heading);
-    font-size: clamp(0.95rem, 4.5vw, 1.25rem); /* responsive clamp scaling */
+    font-size: clamp(0.8rem, 4.5vw, 1.25rem); /* wider clamp scaling range */
     font-weight: 800;
     color: var(--text-main);
     line-height: 1.1;
@@ -311,7 +311,7 @@ section {
 }
 
 .logo-sub {
-    font-size: clamp(0.65rem, 2.5vw, 0.75rem); /* responsive clamp scaling */
+    font-size: clamp(0.55rem, 2.5vw, 0.75rem); /* wider clamp scaling range */
     color: var(--text-muted);
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -1439,6 +1439,9 @@ section {
     .container {
         padding: 0 1.5rem;
     }
+    .header-container {
+        padding: 0 1rem; /* reduced padding to fit logo + toggle on tablet/mobile */
+    }
     .nav-toggle {
         display: block;
     }
@@ -1521,6 +1524,9 @@ section {
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
+    }
+    .header-container {
+        padding: 0 0.5rem; /* minimal padding to fit logo + toggle on small phones */
     }
 
     .hero-title {
