@@ -259,7 +259,7 @@ section {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.25rem 0;
+    padding: 0.85rem 0; /* constant padding to prevent vertical shift */
     transition: var(--transition);
 }
 
@@ -284,31 +284,39 @@ section {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex-shrink: 0;
 }
 
 .logo-icon {
     color: var(--primary);
+    flex-shrink: 0;
+    display: block;
 }
 
 .logo-text {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-height: 42px; /* fixed height container to prevent shifts */
+    text-align: left;
 }
 
 .logo-name {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: clamp(0.95rem, 4.5vw, 1.25rem); /* responsive clamp scaling */
     font-weight: 800;
     color: var(--text-main);
     line-height: 1.1;
+    white-space: nowrap; /* prevent wrapping */
 }
 
 .logo-sub {
-    font-size: 0.75rem;
+    font-size: clamp(0.65rem, 2.5vw, 0.75rem); /* responsive clamp scaling */
     color: var(--text-muted);
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 500;
+    white-space: nowrap; /* prevent wrapping */
 }
 
 .nav-menu {
@@ -1514,12 +1522,7 @@ section {
     .container {
         padding: 0 1rem;
     }
-    .logo-name {
-        font-size: 1.1rem;
-    }
-    .logo-sub {
-        font-size: 0.65rem;
-    }
+
     .hero-title {
         font-size: 2rem;
     }
