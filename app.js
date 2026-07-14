@@ -251,4 +251,141 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    /* ==========================================
+       6. Medicine Rain Animation (Canvas)
+       ========================================== */
+    function initMedicineRain() {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'medicine-rain-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1'; // Place behind website contents but above twinkling stars background
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const particles = [];
+        const maxParticles = 40;
+        const types = ['capsule', 'pill', 'drop', 'cross'];
+        const colors = ['#00f2ff', '#cf5cff'];
+
+        class Particle {
+            constructor(initY = false) {
+                this.reset(initY);
+            }
+
+            reset(initY = false) {
+                this.x = Math.random() * width;
+                this.y = initY ? Math.random() * height : -20 - Math.random() * 50;
+                this.speed = 1.2 + Math.random() * 2.0;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.03;
+                this.scale = 0.6 + Math.random() * 0.7;
+                this.type = types[Math.floor(Math.random() * types.length)];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.opacity = 0.12 + Math.random() * 0.18;
+            }
+
+            update() {
+                this.y += this.speed;
+                this.angle += this.spin;
+
+                // Reset when it goes off screen
+                if (this.y > height + 20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.scale(this.scale, this.scale);
+                ctx.globalAlpha = this.opacity;
+
+                if (this.type === 'capsule') {
+                    // Draw a capsule with two halves (cyan and violet)
+                    ctx.fillStyle = '#00f2ff';
+                    ctx.beginPath();
+                    ctx.arc(0, -5, 4, Math.PI, 0);
+                    ctx.lineTo(4, 0);
+                    ctx.lineTo(-4, 0);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    ctx.fillStyle = '#cf5cff';
+                    ctx.beginPath();
+                    ctx.arc(0, 5, 4, 0, Math.PI);
+                    ctx.lineTo(-4, 0);
+                    ctx.lineTo(4, 0);
+                    ctx.closePath();
+                    ctx.fill();
+                } else if (this.type === 'pill') {
+                    // Draw a round pill with a division line
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.strokeStyle = '#111417';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(-5, 0);
+                    ctx.lineTo(5, 0);
+                    ctx.stroke();
+                } else if (this.type === 'drop') {
+                    // Draw a homeopathy droplet
+                    ctx.fillStyle = '#00f2ff';
+                    ctx.beginPath();
+                    ctx.moveTo(0, -6);
+                    ctx.bezierCurveTo(3, -3, 4, 1, 0, 5);
+                    ctx.bezierCurveTo(-4, 1, -3, -3, 0, -6);
+                    ctx.closePath();
+                    ctx.fill();
+                } else if (this.type === 'cross') {
+                    // Draw a medical cross
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(-1.5, -5, 3, 10);
+                    ctx.fillRect(-5, -1.5, 10, 3);
+                }
+
+                ctx.restore();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(new Particle(true));
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Start animation loop
+        animate();
+    }
+
+    // Initialize medicine rain after page loads
+    initMedicineRain();
 });
