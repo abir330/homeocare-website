@@ -390,9 +390,36 @@ document.addEventListener('DOMContentLoaded', () => {
     initMedicineRain();
 
     /* ==========================================
-       7. Scroll Reveal Animation
+       7. Scroll Reveal & Word Stagger Animation
        ========================================== */
-    const revealElements = document.querySelectorAll('.reveal');
+    // Split heading/subheading text into spans of individual words for staggered fade-in + slide-up
+    function initTextRevealAnimation() {
+        const targets = document.querySelectorAll(
+            '.hero-title, .hero-subtitle, .section-tag, .section-title, .section-desc, .philosophy-card h3, .service-card h3, .chamber-title, .step-text h3, .appointment-card h3'
+        );
+
+        targets.forEach(target => {
+            const text = target.textContent.trim();
+            const words = text.split(/\s+/);
+            target.innerHTML = ''; // clear original text
+
+            words.forEach((word, index) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.classList.add('reveal-word');
+                wordSpan.style.setProperty('--word-index', index);
+                wordSpan.textContent = word + (index < words.length - 1 ? ' ' : '');
+                target.appendChild(wordSpan);
+            });
+
+            target.classList.add('reveal-text-container');
+        });
+    }
+
+    // Initialize word splits
+    initTextRevealAnimation();
+
+    // Query both whole-section reveals and container reveals
+    const revealElements = document.querySelectorAll('.reveal, .reveal-text-container');
     
     if ('IntersectionObserver' in window && revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -403,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, {
-            threshold: 0.15,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         });
 

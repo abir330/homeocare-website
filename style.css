@@ -900,6 +900,26 @@ section {
     transform: translateY(0);
 }
 
+/* Word Stagger Reveal Styles */
+.reveal-text-container {
+    display: block;
+}
+
+.reveal-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-delay: calc(var(--word-index) * 0.05s);
+    white-space: pre-wrap;
+}
+
+.reveal-text-container.active .reveal-word {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* -------------------------------------------------------------------------- */
 /* 9. Services & Specialization                                               */
 /* -------------------------------------------------------------------------- */
