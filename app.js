@@ -439,4 +439,83 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fallback for browsers that don't support IntersectionObserver
         revealElements.forEach(el => el.classList.add('active'));
     }
+
+    /* ==========================================
+       8. Background Cursor Glow Follower
+       ========================================== */
+    function initCursorGlow() {
+        const glow = document.getElementById('cursor-glow');
+        if (!glow) return;
+
+        // Skip cursor follower on mobile touch devices
+        if (window.matchMedia('(max-width: 768px)').matches) return;
+
+        let posX = 0, posY = 0;
+        let mouseX = 0, mouseY = 0;
+
+        // Mouse Move Event
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.style.opacity = '1';
+        });
+
+        // Mouse Leave Event (window boundary)
+        document.addEventListener('mouseleave', () => {
+            glow.style.opacity = '0';
+        });
+
+        // Request Animation Loop for smooth trailing interpolation (Lerp)
+        function updateGlowPosition() {
+            // Lerp algorithm: target position = current + (mouse - current) * factor
+            posX += (mouseX - posX) * 0.12;
+            posY += (mouseY - posY) * 0.12;
+
+            glow.style.transform = `translate(-50%, -50%) translate3d(${posX}px, ${posY}px, 0)`;
+
+            requestAnimationFrame(updateGlowPosition);
+        }
+
+        updateGlowPosition();
+    }
+
+    initCursorGlow();
+
+    /* ==========================================
+       9. 3D Card Tilt Effect
+       ========================================== */
+    function initTiltEffect() {
+        // Skip tilt on mobile/tablets
+        if (window.matchMedia('(max-width: 768px)').matches) return;
+
+        const cards = document.querySelectorAll('.service-card, .philosophy-card, .chamber-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Max tilt angles: 6 degrees
+                const rotateX = ((centerY - y) / centerY) * 6;
+                const rotateY = ((x - centerX) / centerX) * 6;
+
+                // Combine tilt with the base vertical shift hover styles
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                card.style.transition = 'transform 0.08s ease-out'; // rapid response during mousemove
+            });
+
+            card.style.transformStyle = 'preserve-3d';
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.style.transition = 'transform 0.4s ease'; // smooth reset transition
+            });
+        });
+    }
+
+    initTiltEffect();
 });
